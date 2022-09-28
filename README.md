@@ -89,7 +89,7 @@ The package was built for Pidora (Fedora 18) using the F20 hidapi source package
 This code is a maintained package in Debian (and Raspian). Use normal apt-get commands:
 
 ```
-$ sudo apt-get install usbrelay
+sudo apt-get install usbrelay
 ```
 
 ### Installing Fedora Packages:
@@ -109,15 +109,16 @@ The HID serial is matched and the ON/OFF command is sent to the chosen relay.
 The usual make, make install dance assuming the hidapi and hidapi-devel packages have been installed. Note that there are two options for the hidapi library: hidapi-hidraw or hidapi-libusb. Different distributions have better results with one or the other. YMMV. 
 
 ```
-$ sudo apt-get install libhidapi-dev libhidapi-hidraw0 git 
-$ git clone https://github.com/darrylb123/usbrelay
-$ cd usbrelay
-$ make
-$ sudo make install
+sudo apt-get install build-essential
+sudo apt-get install libhidapi-dev libhidapi-hidraw0 git 
+git clone https://github.com/darrylb123/usbrelay
+cd usbrelay
+make
+sudo make install
 
 
 ### Test with a usbrelay plugged in
-$ sudo usbrelay
+sudo usbrelay
 
 ### Build the python interface using the instructions below
 
@@ -133,7 +134,7 @@ $ make HIDAPI=libusb
 You can also build using Docker. Assuming you have Docker installed (only tested with version 18), execute the build script:
 
 ```
-$ ./build.sh
+./build.sh
 ```
 
 The usbrelay binary, libusbrelay.so and libusbrelay_py.so libraries will be built in the root directory of the repo.
@@ -142,8 +143,8 @@ The usbrelay binary, libusbrelay.so and libusbrelay_py.so libraries will be buil
 The code needs to access the device. This can be achieved either by running the program with root privileges (so sudo is your friend) or by copying 
 50-usbrelay.rules to /etc/udev/rules.d
 ```
-$ sudo cp 50-usbrelay.rules /etc/udev/rules.d
-$ sudo udevadm control -R
+sudo cp 50-usbrelay.rules /etc/udev/rules.d
+sudo udevadm control -R
 ```
 
 Add users that need to operate the relays to the usbrelay group:
@@ -259,8 +260,8 @@ This also optionally includes a python extension. In order to build the python e
 Debian:
 ```
 ##Install Python3 dev package
-# sudo apt install libpython3-dev python3-venv pip
-# sudo pip install build
+sudo apt install libpython3-dev python3-venv pip
+sudo pip install build
 ```
 
 Fedora:
@@ -272,10 +273,10 @@ Fedora:
 With the dependency installed, the library can be built and installed with:
 ```
 ##Build libusbrelay_py.so
-$ cd usbrelay_py
-$ make
+cd usbrelay_py
+make
 ##Install to global python
-$ sudo make install
+sudo make install
 ```
 
 Once installed, the library can be used by any python script, assuming it is running as a user with suitable permissions per the changes to udev above.
